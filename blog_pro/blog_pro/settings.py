@@ -143,10 +143,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
-SOCIAL_AUTH_FACEBOOK_KEY = '1198036630550832'
-SOCIAL_AUTH_FACEBOOK_SECRET = 'a515e4a84265d42dd7079412f6519da9'
-SOCIAL_AUTH_GITHUB_KEY = '735fdb35d56350b0ee7a'
-SOCIAL_AUTH_GITHUB_SECRET = 'fbb52d69acb5121c3024b0a896fc15949b4d70f5'
+SOCIAL_AUTH_FACEBOOK_KEY = 'add app key'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'add secret key'
+SOCIAL_AUTH_GITHUB_KEY = 'add app key'
+SOCIAL_AUTH_GITHUB_SECRET = 'add secret key'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 SITE_ID = 2
