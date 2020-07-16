@@ -1,0 +1,57 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+<h1 class='posttitle loader'>{{post.title}}</h1>
+<p><strong> Author:</strong>{{post.author}}</p>
+{%if post.published_date %}
+<div>
+  {{post.published_date}}
+</div>
+<hr>
+{%else%}
+{% ifequal post.author|stringformat:"s" request.user.username %}
+  <a class='btn btn-default' href="{% url 'post_publish' pk=post.pk %}">Publish</a><hr>
+{% endifequal %}
+{%endif%}
+<p class='postcontent'>{{post.text|safe|linebreaksbr}}</p>
+{% if user.is_authenticated %}
+{% ifequal post.author|stringformat:"s" request.user.username%}
+<hr>
+<a class='btn btn-primary' href="{% url 'post_edit' pk=post.pk %}">
+  <span class="glyphicon glyphicon-pencil"></span>
+</a>
+<a class='btn btn-primary' href="{% url 'post_remove' pk=post.pk %}">
+  <span class="glyphicon glyphicon-remove"></span>
+</a>
+{% endifequal %}
+{% endif %}
+
+<a class='btn btn-primary btn-comment' href="{% url 'add_comment_to_post' pk=post.pk %}">Add Comment</a><hr>
+<div class="container">
+  {% for comment in post.comments.all %}
+  <br>
+  {% if user.is_authenticated or comment.approved_comment %}
+  {%if not comment.approved_comment %}
+  {% ifequal post.author|stringformat:"s" request.user.username%}
+  <p>{{comment.create_date}}</p>
+  <p>{{comment.text|safe|linebreaksbr}}</p>
+  <p>Posted By:{{comment.author}}</p>
+  <a class='btn btn-primary' href="{% url 'comment_approve' pk=comment.pk %}">
+    <span class="glyphicon glyphicon-ok"></span>
+  </a>
+  <a class='btn btn-primary' href="{% url 'comment_remove' pk=comment.pk %}">
+    <span class="glyphicon glyphicon-remove"></span>
+  </a>
+  {% endifequal %}
+  {%else%}
+  <p>{{comment.create_date}}</p>
+  <p>{{comment.text|safe|linebreaksbr}}</p>
+  <p>Posted By:{{comment.author}}</p>
+  <hr>
+  {% endif %}
+  {%endif%}
+  {%empty%}
+  <p>No Comments!</p>
+  {%endfor%}
+</div>
+
+{% endblock %}

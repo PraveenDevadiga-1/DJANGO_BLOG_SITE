@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+{% load static %}
+
+
+<html>
+    <head>
+        <title>Blog Project</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        {# MEDIUM STYLE EDITOR#}
+        <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script>
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+
+        {# Custom CSS#}
+        <link rel="stylesheet" href="{%static "css/blog.css" %}"/>
+
+        {# Fonts#}
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+<body>
+<nav class="navbar navbar-default techfont custom-navbar ">
+
+  <p><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">Tech Blog</a></li></p><br>
+  <div class="content container">
+  <div class="row">
+      <ul class="nav navbar-nav navbar">
+        <div class="col-md-4 "><li><a href="{% url 'about' %}">About</a></li></div>
+        <div class="col-md-4 "><li><a href="https://github.com/PraveenDevadiga-1">MyGithub</a></li></div>
+        <div class="col-md-4 "><li><a href="https://www.linkedin.com/in/praveen-devadiga-1514a917b/">MyLinkedIn</a></li></div>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+        <div class="col-md-3 ">
+        <li>
+          <a href="{% url 'post_new' %}" >New Post</a>
+        </li></div>
+
+        <div class="col-md-3 ">
+        <li>
+          <a href="{% url 'post_draft_list' %}">My Blogs</a>
+        </li></div>
+
+        <div class="col-md-3 ">
+        <li>
+          <a href="{% url 'logout' %}" >Log out</a>
+        </li></div>
+
+        <div class="col-md-3 ">
+        <li>
+          Welcome:<a href="{% url "post_draft_list" %}"> {{ user.username }}</a>
+        </li></div>
+          {% else %}
+          <div class="col-md-3"><li><a class='nav navbar-right' href="{% url 'login' %}" ><span class="glyphicon glyphicon-user"></span></a></li></div>
+        {% endif %}
+
+      </ul>
+
+</div>
+
+</div>
+</nav>
+
+
+
+
+  {# The actual blog posts#}
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                  <div class="blog_posts">
+                    <hr>
+                    {% block content %}
+                    {% endblock %}
+                   </div>
+
+                    </div>
+                <div class="info col-md-8">
+                  <h3 id="info"><strong>Instructions:</strong></h3><hr>
+                  <p>click on post title for details</p><hr>
+                  <p>Login to post or comment</p><hr>
+                  <p>You can update or delete your posts</p><hr>
+                  <p>My Blogs maintains your both published and unpublished posts</p><hr>
+                  <p>You can approve or discard comments made on your post</p><hr>
+                  <p>User profile and Author post filter features coming soon!</p>
+                </div>
+
+            </div>
+        </div>
+
+
+
+{# SCRIPTS#}
+
+<script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
+
+</body>
+</html>

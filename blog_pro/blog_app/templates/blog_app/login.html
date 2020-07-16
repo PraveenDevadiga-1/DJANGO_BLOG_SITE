@@ -1,0 +1,40 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+
+ <div id="container-login">
+        <div id="title">
+            <i class="material-icons lock">lock</i> Login
+        </div>
+   <form action="{% url 'login' %}" method="post">
+     {% csrf_token %}
+     <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                <input id="username" name='username' placeholder="Username" type="text" required class="validate" autocomplete="off">
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">vpn_key</i>
+                </div>
+                <input id="password" name='password' placeholder="Password" type="password" required class="validate" autocomplete="off">
+            </div>
+            <br>
+            <input type="submit" value="Log In" />
+        </form>
+
+        <div class="register">
+             Don't have an account yet?
+            <a href="{% url 'register' %}"><button id="register-link">Register here</button></a>
+        </div>
+        <p><strong>-- OR --</strong></p>
+        {% load socialaccount %}
+        <a href="{% provider_login_url "google" %}" method="oauth2">Login with Google</a><br>
+        <a href="{% url 'social:begin' "facebook" %}">Login with Facebook</a><br>
+        <a href="{% url 'social:begin' 'github' %}">Login with Github</a>
+    </div>
+
+{% endblock %}

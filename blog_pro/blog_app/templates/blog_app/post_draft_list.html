@@ -1,0 +1,18 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+{% for post in posts %}
+{% ifequal post.author|stringformat:"s" request.user.username %}
+<div class="post">
+  <h3><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}}</a></h3>
+  {%if post.published_date %}
+  <p class='date'>published:{{post.published_date|date:'D-M-Y'}}</p>
+  <p class='date'>created:{{post.create_date|date:'D-M-Y'}}</p>
+  {%else%}
+  <p class='date'>published: Not published yet</p>
+  <p class='date'>created:{{post.create_date|date:'D-M-Y'}}</p>
+  {%endif%}
+</div>
+<hr>
+{%endifequal%}
+{%endfor%}
+{% endblock %}

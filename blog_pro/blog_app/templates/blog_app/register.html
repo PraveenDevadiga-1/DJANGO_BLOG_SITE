@@ -1,0 +1,42 @@
+{%extends "blog_app/base.html"%}
+
+ {%block content%}
+  {%if registered%}
+    <p>THANK YOU FOR REGISTRING .......</p>
+   {%else%}
+   <div id="container-register">
+        <div id="title">
+            <i class="material-icons lock">lock</i> Register
+        </div>
+   <form enctype="multipart/form-data" method="post">
+     {% csrf_token %}
+     <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">face</i>
+                </div>
+                  {{user_form.username}}
+            </div>
+      <div class="clearfix"></div>
+      <div class="input">
+                <div class="input-addon">
+                    <i class="material-icons">email</i>
+                </div>
+                {{user_form.email}}
+            </div>
+          <div class="clearfix"></div>
+            <div class="input">
+                      <div class="input-addon">
+                          <i class="material-icons">vpn_key</i>
+                      </div>
+                      {{user_form.password}}
+                  </div><br>
+
+     <input type="submit"  value="REGISTER">
+     </form>
+     <div class="register">
+            Do you already have an account?
+            <a href="{% url 'login' %}"><button id="register-link">Log In here</button></a>
+        </div>
+ </div>
+   {%endif%}
+ {%endblock%}
